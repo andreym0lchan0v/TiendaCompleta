@@ -1,0 +1,63 @@
+<div class="product-container">
+  <div class="button-group">
+    <button class="add-product-btn" (click)="openAddProductModal()">Añadir Producto</button>
+    <button class="delete-all-btn" (click)="deleteAllProducts()">Eliminar Todo</button>
+
+    <!-- Buscador de productos -->
+    <div class="search-container">
+      <i class="bi bi-search"></i>
+      <input type="text" [(ngModel)]="searchTerm" class="form-control" placeholder="Buscar producto..." (input)="filterProducts()">
+    </div>
+
+    <!-- Filtro de precio con slider -->
+    <div class="price-slider">
+      <label>Precio: ${{ minPrice }} - ${{ maxPrice }}</label>
+      <div class="range-slider">
+        <input type="range" [(ngModel)]="minPrice" [min]="priceRangeMin" [max]="priceRangeMax" (input)="updatePriceRange()">
+        <input type="range" [(ngModel)]="maxPrice" [min]="priceRangeMin" [max]="priceRangeMax" (input)="updatePriceRange()">
+      </div>
+    </div>
+
+    <!-- Botón para limpiar filtros -->
+    <button class="add-product-btn" (click)="resetFilters()">Restablecer</button>
+  </div>
+
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of filteredProducts" (click)="openEditProductModal(product)">
+      <img [src]="product.imageUrl" alt="Imagen del producto">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <span class="price">${{ product.price }}</span>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div *ngIf="showProductModal" class="modal">
+    <div class="modal-content">
+      <i class="bi bi-bookmark-x-fill icon-cancel" (click)="closeProductModal()"></i>
+      <h2>{{ isEditing ? 'Editar Producto' : 'Añadir Producto' }}</h2>
+
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="newProduct.name" class="input-edit">
+
+      <label>Descripción:</label>
+      <input type="text" [(ngModel)]="newProduct.description" class="input-edit">
+
+      <label>Precio:</label>
+      <input type="number" [(ngModel)]="newProduct.price" class="input-edit">
+
+      <label>Imagen del Producto:</label>
+      <div class="image-options">
+        <input type="text" [(ngModel)]="newProduct.imageUrl" class="input-edit" placeholder="URL de imagen" (input)="clearFileSelection()">
+        <input type="file" #fileInput (change)="uploadImage($event)" accept="image/*" class="file-input">
+      </div>
+
+      <img *ngIf="newProduct.imageUrl" [src]="newProduct.imageUrl" alt="Vista previa de imagen" class="image-preview">
+
+      <button class="btn-success" (click)="saveProduct()">Guardar</button>
+      <button class="btn-cancel" (click)="closeProductModal()">Cancelar</button>
+      <button class="delete-btn" *ngIf="isEditing" (click)="deleteProduct()">Eliminar</button>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

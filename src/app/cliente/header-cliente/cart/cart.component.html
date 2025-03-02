@@ -1,0 +1,43 @@
+<div class="cart-overlay" *ngIf="isCartVisible" (click)="closeCart()"></div>
+
+<div class="cart-sidebar" [class.active]="isCartVisible">
+  <button class="close-btn" (click)="closeCart()">
+    <i class="bi bi-x-lg"></i>
+  </button>
+
+  <h2><i class="bi bi-cart-fill"></i> Mi Carrito</h2>
+
+  <div *ngIf="cart.length === 0" class="empty-cart">
+    <p>Tu carrito está vacío</p>
+  </div>
+
+  <div class="cart-list">
+    <div class="cart-item" *ngFor="let product of cart; let i = index">
+      <img [src]="product.imageUrl" alt="Imagen del producto" class="cart-img">
+
+      <div class="cart-info">
+        <h3>{{ product.name }}</h3>
+        <p class="price">Precio: ${{ product.price }}</p>
+
+        <div class="quantity-controls">
+          <button (click)="decreaseQuantity(i)" class="btn-quantity"><i class="bi bi-dash-circle"></i></button>
+          <span class="quantity">{{ product.quantity }}</span>
+          <button (click)="increaseQuantity(i)" class="btn-quantity"><i class="bi bi-plus-circle"></i></button>
+        </div>
+
+        <p class="subtotal">Subtotal: ${{ product.price * product.quantity }}</p>
+
+        <button class="btn-remove" (click)="removeFromCart(i)">
+          <i class="bi bi-trash"></i> Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-total">
+    <h3>Total: <span>${{ total }}</span></h3>
+    <button class="btn-clear" (click)="clearCart()">
+      <i class="bi bi-x-circle"></i> Vaciar Carrito
+    </button>
+  </div>
+</div>

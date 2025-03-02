@@ -1,0 +1,110 @@
+
+.settings-container {
+  width: 75%;
+  max-width: 275px;
+  top: 70px;
+  bottom: 0;
+  background-color: #fbfbfb;
+}
+
+
+.btn {
+  display: block;
+}
+
+@media (max-width: 576px) {
+  .boton1 {
+    background-color: red !important;
+    display: block !important;
+  }
+}
+
+
+@media (max-width: 769px) {
+  .boton1 {
+    display: none;
+  }
+}
+
+
+@media (max-width: 992px) {
+  .boton2 {
+    background-color: green;
+  }
+}
+
+@media (max-width: 576px) {
+  .boton2 {
+    color: white;
+    font-size: smaller;
+    background-color: black;
+  }
+}
+
+
+
+.boton3 {
+  background-color: yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 15px;
+}
+
+@media (max-width: 576px) {
+  .boton3 {
+    span {display: none;}
+    i {font-size: larger;}
+  }
+}
+
+@media (min-width: 1200px) {
+  .boton3 {
+    display: none;
+  }
+}
+
+
+
+
+.boton4 {
+  width: 200px;
+  background-color: blue;
+}
+
+@media (max-width: 992px) {
+  .boton4 {
+    width: 80%;
+  }
+}
+
+
+.boton5 {
+  background-color: orange;
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .boton5 {
+    display: none;
+  }
+}
+
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
+}
+
+
+@media (max-width: 769px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
