@@ -44,7 +44,7 @@ export class SidebarComponent implements OnInit {
       setTimeout(() => {
         this.router.navigate(['/login']);
         this.popupService.close();
-      }, 1500);
+      }, 750);
 
     } else {
       this.popupService.showMessage("Cancelado", "Tu sesión sigue activa", "info");

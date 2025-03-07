@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-tab-menu',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './tab-menu.component.html',
   styleUrl: './tab-menu.component.scss'
 })
