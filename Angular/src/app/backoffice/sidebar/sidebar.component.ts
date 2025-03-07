@@ -13,7 +13,7 @@ import { PopupService } from '../../services/utils/popup.service';
 })
 export class SidebarComponent implements OnInit {
 
-  isActiveMenuHeader: boolean = true;
+  isActiveMenuHeader: boolean = false;
   constructor(
     private sidebarStatusService: SidebarStatusService,
     private tokenService: TokenService,

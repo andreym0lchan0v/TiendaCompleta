@@ -34,7 +34,7 @@ export const routes: Routes = [
 
       {path: "", redirectTo: "control-panel", pathMatch: "full"}, // -> www.ejemplo.com/app
       {path: "control-panel", component: ControlPanelComponent}, // -> www.ejemplo.com/app/control-panel
-      {path: "perfil", component: PerfilComponent},
+      {path: "profile", component: PerfilComponent},
       {path: "productos", component: ProductosComponent}
     ]
   },
