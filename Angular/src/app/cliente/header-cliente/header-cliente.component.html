@@ -4,11 +4,20 @@
       <img style="max-width: 115px" src="/logo.svg" alt="logo">
     </a>
   </div>
+
   <nav class="nav-container">
-    <a href="">Inicio</a>
+    <a routerLink="/">Inicio</a>
+    <a routerLink="perfil">Perfil</a>
     <a routerLink="tienda">Tienda</a>
     <a class="cart-icon"><i class="bi bi-cart"></i></a>
-    <button type="button" class="btn-login" routerLink="app/control-panel">
+
+    <!-- Contenedor para el mensaje de usuario autenticado y botón de logout -->
+    <div class="user-info" *ngIf="isLoggedIn">
+      <span>Hola, <span class="username">{{ username }}</span> !</span>
+    </div>
+
+    <!-- Botón de inicio de sesión si el usuario NO está autenticado -->
+    <button *ngIf="!isLoggedIn" type="button" class="btn-login" routerLink="app/control-panel">
       <i class="bi bi-person"></i> Iniciar sesión
     </button>
   </nav>

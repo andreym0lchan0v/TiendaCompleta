@@ -85,3 +85,22 @@ body {
   color: #212529;
   transform: scale(1.05);
 }
+
+/* Estilos del mensaje "Hola, username!" */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white; // Color predeterminado para "Hola" y "!"
+}
+
+/* Cambia solo el color y el tamaño del username */
+.user-info .username {
+  color: #ffcc00; // Cambia a un color destacado (ejemplo: amarillo)
+  font-size: 1.4rem; // Hace el username un poco más grande
+  font-weight: bold;
+}
+
+

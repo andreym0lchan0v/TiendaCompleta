@@ -58,8 +58,10 @@ export class LoginComponent {
       this.userServiceService.save(data.username, data.role,data.firstName, data.lastName, data.address);
       this.popupService.close();
       this.popupService.showMessage("Bienvenido", `Hola ${data.firstName},${data.lastName} !`, "success");
-      this.router.navigate(['/app/control-panel']);
-    }, 1200)
+      this.router.navigate(['/app/control-panel']).then(() => {
+        window.location.reload();
+      });
+    }, 700)
 
       },
       error: (err) => {
