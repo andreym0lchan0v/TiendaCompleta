@@ -1,20 +1,21 @@
 <div class="profile-container">
   <h2>Perfil de Usuario</h2>
 
-  <div class="profile-card">
-    <p><strong>Usuario:</strong> {{ userData.username }}</p>
-    <p><strong>Rol:</strong> {{ userData.role }}</p>
-    <p><strong>Nombre:</strong> {{ userData.firstName }}</p>
-    <p><strong>Apellido:</strong> {{ userData.lastName }}</p>
-    <p><strong>Dirección:</strong> {{ userData.address }}</p>
+  <div class="profile-info">
+    <p><i class="fas fa-user"></i> <strong>Usuario:</strong> {{ userData.username }}</p>
+    <p><i class="fas fa-user-shield"></i> <strong>Rol:</strong> {{ userData.role }}</p>
+    <p><i class="fas fa-id-badge"></i> <strong>Nombre:</strong> {{ userData.firstName }}</p>
+    <p><i class="fas fa-user-tag"></i> <strong>Apellido:</strong> {{ userData.lastName }}</p>
+    <p><i class="fas fa-map-marker-alt"></i> <strong>Dirección:</strong> {{ userData.address }}</p>
   </div>
 
   <div class="profile-actions">
-    <button class="btn btn-primary" (click)="logout()">Cerrar Sesión</button>
+    <button class="btn btn-primary" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+    </button>
 
-    <!-- Mostrar botón solo si el usuario es ADMIN o SELLER -->
     <button *ngIf="showBackendButton" type="button" routerLink="/app/productos" class="btn btn-secondary">
-      ADMIN PANEL
+      <i class="fas fa-cogs"></i> ADMIN PANEL
     </button>
   </div>
 </div>

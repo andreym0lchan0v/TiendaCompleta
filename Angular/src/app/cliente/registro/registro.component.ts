@@ -64,8 +64,18 @@ export class RegistroComponent {
       },
       error: err => {
         this.popupService.close();
-        console.log(err);
-        this.popupService.showMessage("Error", "Hubo un problema al registrar el usuario", "error");
+        let message;
+
+        switch (err.error) {
+          case "Username already taken":
+            message = "El nombre de usuario ya está en uso. Prueba con otro.";
+            break;
+          default:
+            message = err.error || "Hubo un problema al registrar el usuario. Inténtelo de nuevo más tarde.";
+            break;
+        }
+
+        this.popupService.showMessage("Error", message, "error");
       }
     });
   }

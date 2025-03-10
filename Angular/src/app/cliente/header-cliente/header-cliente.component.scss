@@ -24,7 +24,8 @@ body {
 /* Logo */
 .logo-container img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-width: 180px;
 }
 
 /* Navegación */
@@ -85,6 +86,7 @@ body {
   color: #212529;
   transform: scale(1.05);
 }
+
 /* Estilos generales del mensaje "¡Hola, username!" */
 .user-info {
   display: flex;
@@ -92,91 +94,62 @@ body {
   gap: 14px;
   font-size: 1.5rem;
   font-weight: bold;
-  background: #ffcc00; /* Mismo color que el header */
+  margin-left: 40px;
+  background: #ffcc00;
   padding: 16px 24px;
   border-radius: 14px;
-  box-shadow: 0px 0px 15px rgba(255, 204, 0, 0.7); /* Efecto de luz dorada */
+  box-shadow: 0px 0px 15px rgba(255, 204, 0, 0.7);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-/* Efecto al pasar el mouse */
 .user-info:hover {
   transform: scale(1.06);
   box-shadow: 0px 0px 22px rgba(255, 204, 0, 0.9);
 }
 
-/* Estilo del texto "¡Hola!" */
-.user-info .greeting {
-  color: inherit; /* Usa el mismo color que el fondo del header */
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.6);
-  animation: neonGlow 1.5s infinite alternate;
-}
-
-/* Estilo del username */
-.user-info .username {
-  color: inherit; /* También usa el mismo color del header */
-  font-size: 1.6rem;
-  font-weight: bold;
-  text-shadow: 0px 0px 12px rgba(255, 255, 255, 0.8);
-  transition: text-shadow 0.3s ease;
-}
-
-.user-info .username:hover {
-  text-shadow: 0px 0px 16px rgba(255, 255, 255, 1);
-}
-
-/* Efecto de resplandor dinámico */
-.user-info::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 60%);
-  opacity: 0.5;
-  transition: opacity 0.5s ease-in-out;
-  animation: pulseGlow 3s infinite alternate;
-}
-
-.user-info:hover::before {
-  opacity: 0.7;
-}
-
-/* Icono opcional */
-.user-info i {
-  font-size: 1.8rem;
-  color: inherit;
-  transition: transform 0.3s ease, text-shadow 0.3s ease;
-}
-
-.user-info:hover i {
-  transform: rotate(10deg);
-  text-shadow: 0px 0px 12px rgba(255, 255, 255, 1);
-}
-
-/* Animaciones de resplandor */
-@keyframes neonGlow {
-  0% {
-    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
+/* Responsividad */
+@media (max-width: 992px) {
+  .header {
+    flex-direction: column;
+    padding: 10px;
+    text-align: center;
   }
-  100% {
-    text-shadow: 4px 4px 18px rgba(255, 255, 255, 0.9);
+  .nav-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .btn-login {
+    width: 100%;
+    text-align: center;
   }
 }
 
-@keyframes pulseGlow {
-  0% {
-    transform: scale(1);
-    opacity: 0.4;
+@media (max-width: 768px) {
+  .header {
+    padding: 8px;
   }
-  100% {
-    transform: scale(1.1);
-    opacity: 0.6;
+  .logo-container img {
+    max-width: 140px;
+  }
+  .nav-container a {
+    font-size: 0.9rem;
+  }
+  .cart-icon i {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    padding: 6px;
+  }
+  .logo-container img {
+    max-width: 120px;
+  }
+  .nav-container {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

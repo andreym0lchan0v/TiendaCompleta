@@ -64,11 +64,29 @@ export class LoginComponent {
     }, 700)
 
       },
-      error: (err) => {
-        this.popupService.close();
-        this.popupService.showMessage("Error", "Credenciales incorrectas, intenta nuevamente.", "error");
-        this.loginForm.reset();
-      }
+      error: err => {
+        let message;
+
+        switch (err.error) {
+            case "Invalid password":
+                message = "Contraseña incorrecta, inténtelo de nuevo.";
+                break;
+            case "User not found":
+                message = "El usuario no existe. Verifique sus credenciales.";
+                break;
+            case "Unauthorized access":
+                message = "Acceso no autorizado. Verifique su usuario y contraseña.";
+                break;
+            default:
+                message = err.error || "Ha ocurrido un error inesperado. Inténtelo de nuevo más tarde.";
+                break;
+        }
+
+        this.popupService.showMessage(
+            'Ups, ha ocurrido un error', message, 'error'
+        );
+    }
+
     });
   }
 }
