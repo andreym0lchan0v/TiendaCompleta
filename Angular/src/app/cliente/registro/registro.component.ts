@@ -26,19 +26,19 @@ export class RegistroComponent {
     private popupService: PopupService
   ) {
     this.registerForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
+      username: ['', [Validators.required,Validators.maxLength(15)]],
       password: [
         '',
         [
           Validators.required,
-          Validators.minLength(8),
+          Validators.minLength(8),Validators.maxLength(15),
           Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)
         ]
       ],
       roleName: ['', [Validators.required]],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      address: ['', [Validators.required]],
+      firstName: ['', [Validators.required,Validators.maxLength(15)]],
+      lastName: ['', [Validators.required,Validators.maxLength(15)]],
+      address: ['', [Validators.required,Validators.maxLength(25)]],
     });
   }
 
