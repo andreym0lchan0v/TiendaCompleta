@@ -73,15 +73,19 @@ export class ProductosComponent implements OnInit {
       price: this.newProduct.price,
       tax: this.newProduct.tax,
       currency: this.newProduct.currency,
-      sellerUsername: this.currentUser // ✅ Agregado para asignar el usuario actual
+      sellerUsername: this.currentUser // ✅ Asignamos el usuario actual
     };
 
     this.productService.createProduct(productData).subscribe({
       next: (createdProduct) => {
         this.popupService.showMessage('Éxito', 'Producto creado correctamente', 'success');
 
-        // ✅ Agregar el nuevo producto directamente a la lista sin recargar
+        // ✅ Asignar el username del vendedor para evitar que aparezca "Desconocido"
+        createdProduct.sellerUsername = this.currentUser;
+
+        // ✅ Agregar el nuevo producto directamente a la lista sin necesidad de recargar
         this.userProducts.push(createdProduct);
+
         this.closeModal();
       },
       error: (error) => {
@@ -91,19 +95,28 @@ export class ProductosComponent implements OnInit {
     });
   }
 
+
   deleteProduct(id: number) {
     this.productService.deleteProduct(id).subscribe({
-      next: () => {
-        this.popupService.showMessage('Éxito', 'Producto eliminado correctamente', 'success');
+      next: (response) => {
+        console.log("✅ Respuesta del backend:", response);
 
-        // ✅ Elimina el producto de la lista sin recargar la página
-        this.userProducts = this.userProducts.filter(product => product.id !== id);
+        if (response.message) {
+          this.popupService.showMessage('Éxito', response.message, 'success');
+          this.userProducts = this.userProducts.filter(product => product.id !== id);
+        } else {
+          this.popupService.showMessage('Error', 'No se pudo eliminar el producto', 'error');
+        }
       },
-      error: () => {
-        this.popupService.showMessage('Error', 'No se pudo eliminar el producto', 'error');
+      error: (error) => {
+        console.error("❌ Error al eliminar producto:", error);
+        this.popupService.showMessage('Error', error.message || 'No se pudo eliminar el producto', 'error');
       }
     });
   }
+
+
+
 
   resetNewProduct() {
     this.newProduct = {

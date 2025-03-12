@@ -90,7 +90,6 @@ public class ProductController {
 
     // 🔄 Modificar producto
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasRole('SELLER') or hasRole('ADMIN')")
     public ResponseEntity<Product> updateProduct(
             @PathVariable Long id,
             @RequestParam("name") String name,
@@ -106,9 +105,17 @@ public class ProductController {
 
     // ❌ Eliminar producto
     @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasRole('SELLER') or hasRole('ADMIN')")
-    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
-        productService.deleteProduct(id);
-        return ResponseEntity.ok("Producto eliminado correctamente");
+    public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable Long id) {
+        try {
+            productService.deleteProduct(id);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Producto eliminado correctamente");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            System.err.println("❌ Error al eliminar el producto: " + e.getMessage());
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "No se pudo eliminar el producto");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
     }
 }

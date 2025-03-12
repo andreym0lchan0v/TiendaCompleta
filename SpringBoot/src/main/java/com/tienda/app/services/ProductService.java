@@ -90,8 +90,14 @@ public class ProductService {
     // ❌ Eliminar producto
     public void deleteProduct(Long id) {
         if (!productRepository.existsById(id)) {
-            throw new IllegalArgumentException("❌ El producto no existe");
+            throw new IllegalArgumentException("❌ El producto no existe en la base de datos");
         }
-        productRepository.deleteById(id);
+        try {
+            productRepository.deleteById(id);
+            System.out.println("✅ Producto eliminado con éxito: ID " + id);
+        } catch (Exception e) {
+            throw new RuntimeException("❌ Error al eliminar el producto: " + e.getMessage());
+        }
     }
+
 }

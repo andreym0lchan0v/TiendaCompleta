@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { ProductInterface } from '../interfaces/product';
 import { TokenService } from './token.service';
 
@@ -51,9 +51,6 @@ getUserProducts(username: string): Observable<ProductInterface[]> {
   // 🆕 Crear un nuevo producto (Ahora incluye `sellerUsername`)
   createProduct(product: any): Observable<any> {
     const token = this.tokenService.getAccessToken();
-
-    console.log("🚀 Enviando JSON al backend:", product);
-
     return this.http.post(`${this.apiUrl}/create`, product, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -75,14 +72,30 @@ getUserProducts(username: string): Observable<ProductInterface[]> {
     });
   }
 
-  // ❌ Eliminar un producto
   deleteProduct(id: number): Observable<any> {
     const token = this.tokenService.getAccessToken();
 
-    return this.http.delete(`${this.apiUrl}/delete/${id}`, {
+    return this.http.delete<{ message?: string; error?: string }>(`${this.apiUrl}/delete/${id}`, {
       headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
       })
-    });
+    }).pipe(
+      map(response => {
+        if (response.message) {
+          console.log("✅ Producto eliminado correctamente:", response.message);
+          return response;
+        } else {
+          throw new Error(response.error || "Error desconocido al eliminar producto");
+        }
+      }),
+      catchError(error => {
+        console.error("❌ Error al eliminar producto:", error);
+        return throwError(() => new Error("Error al eliminar el producto"));
+      })
+    );
   }
+
+
+
 }
