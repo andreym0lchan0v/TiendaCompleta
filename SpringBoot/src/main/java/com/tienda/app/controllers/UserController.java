@@ -1,9 +1,6 @@
 package com.tienda.app.controllers;
 
-import com.tienda.app.dtos.auth.CheckTokenRequest;
-import com.tienda.app.dtos.auth.LoginRequest;
-import com.tienda.app.dtos.auth.LoginResponse;
-import com.tienda.app.dtos.auth.RegisterRequest;
+import com.tienda.app.dtos.auth.*;
 import com.tienda.app.models.User;
 import com.tienda.app.models.UserInfo;
 import com.tienda.app.repositories.UserInfoRepository;
@@ -84,6 +81,20 @@ public class UserController {
     public ResponseEntity<Boolean> checkToken(@RequestBody CheckTokenRequest checkTokenRequest) {
         return ResponseEntity.ok(this.userService.checkToken(checkTokenRequest));
     }
+    @PutMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request) {
+        try {
+            // Obtener el username del usuario autenticado
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            userService.changePassword(username, request);
+            return ResponseEntity.ok("Password updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
+
+
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout(@RequestBody CheckTokenRequest checkTokenRequest) {

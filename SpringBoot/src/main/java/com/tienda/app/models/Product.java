@@ -29,8 +29,10 @@ public class Product {
     @Column(nullable = false)
     private Double tax;
 
-    // Tipo de moneda
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING) // Asegura que se guarde como texto y no como número
     private Currency currency;
+
 
     @CreationTimestamp
     private LocalDateTime createdAt = LocalDateTime.now();

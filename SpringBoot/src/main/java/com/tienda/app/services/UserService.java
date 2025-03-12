@@ -1,9 +1,6 @@
 package com.tienda.app.services;
 
-import com.tienda.app.dtos.auth.CheckTokenRequest;
-import com.tienda.app.dtos.auth.LoginRequest;
-import com.tienda.app.dtos.auth.LoginResponse;
-import com.tienda.app.dtos.auth.RegisterRequest;
+import com.tienda.app.dtos.auth.*;
 import com.tienda.app.models.Role;
 import com.tienda.app.models.User;
 
@@ -137,6 +134,36 @@ public class UserService implements UserDetailsService {
                 checkTokenRequest.getUsername()
         );
     }
+    @Transactional
+    public void changePassword(String username, ChangePasswordRequest request) {
+        // Obtener usuario de la BD
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        // Depuración: Verificar qué valores están llegando
+        System.out.println("Usuario autenticado: " + username);
+        System.out.println("Contraseña actual ingresada (texto plano): " + request.getCurrentPassword());
+        System.out.println("Contraseña en BD (encriptada): " + user.getPassword());
+
+        // Validar que la contraseña actual ingresada coincida con la almacenada
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Current password is incorrect");
+        }
+
+        // Validar que las nuevas contraseñas coincidan
+        if (!request.getNewPassword().equals(request.getConfirmPassword())) {
+            throw new IllegalArgumentException("New passwords do not match");
+        }
+
+        // Encriptar la nueva contraseña antes de guardarla en la base de datos
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
+
+        System.out.println("Contraseña actualizada correctamente para el usuario: " + username);
+    }
+
+
+
     public void logout(String token) {
         // No se puede invalidar un JWT directamente, pero puedes implementarlo si llevas un control de tokens.
         System.out.println("Logout: Token recibido -> " + token);

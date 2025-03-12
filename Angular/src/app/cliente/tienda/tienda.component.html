@@ -1,2 +1,15 @@
-<p>tienda works!</p>
+<div class="tienda-container">
+  <h2>Tienda</h2>
+
+  <div class="product-list">
+    <div *ngFor="let product of products" class="product-card">
+      <h4>{{ product.name }}</h4>
+      <p>{{ product.description }}</p>
+      <p>Precio: {{ product.price }} {{ product.currency }}</p>
+      <p>Publicado por: {{ product.sellerUsername }}</p>
+      <img *ngIf="product.image" [src]="'data:image/png;base64,' + product.image" alt="Imagen del producto">
+    </div>
+  </div>
+</div>
+
 <app-cart></app-cart>
