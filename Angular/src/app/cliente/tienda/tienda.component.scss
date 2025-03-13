@@ -1,85 +1,173 @@
-/* 📌 Contenedor de productos */
+/* 📌 Contenedor principal */
 .tienda-container {
-  padding: 50px;
-  background: white;
+  padding: 40px;
+  background: #f8f9fa;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
-/* 📌 Grid de productos */
+/* 📌 Barra de búsqueda y filtros en línea */
+.filters-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 20px;
+}
+
+/* 🔍 Estilo del buscador */
+.search-container {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 250px;
+  transition: border 0.3s ease-in-out;
+
+  i {
+    color: #666;
+    margin-right: 10px;
+    font-size: 1.2rem;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    padding: 5px;
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+
+  &:focus-within {
+    border-color: #ffcc00;
+  }
+}
+
+/* 🎚️ Slider de Precio Mejorado */
+.price-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  font-weight: bold;
+  text-align: center;
+
+  .range-slider {
+    position: relative;
+    width: 100%;
+    height: 8px;
+    background: #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* 🎚️ Barra de rango dinámica */
+  .slider-track {
+    position: absolute;
+    height: 8px;
+    background: #ffcc00;
+    border-radius: 4px;
+    left: var(--slider-min);
+    right: calc(100% - var(--slider-max));
+  }
+
+  input[type="range"] {
+    position: absolute;
+    width: 100%;
+    -webkit-appearance: none;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: black;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: all;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+
+/* 🔄 Botón de restablecer */
+.reset-btn {
+  background: #ffcc00;
+  color: black;
+  font-weight: bold;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+
+  &:hover {
+    background: #e6b800;
+  }
+}
+
+/* 📦 Grid de productos */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  width: 90%;
-  max-width: 1200px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
 }
 
-/* 📌 Tarjeta de producto */
+/* 📦 Tarjetas de productos alineadas */
 .product-card {
-  background: #2c3034;
+  background: white;
   border-radius: 12px;
   padding: 15px;
   text-align: center;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  height: 250px; /* Altura uniforme */
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 0px 10px 20px rgba(255, 204, 0, 0.2);
-  }
-}
-
-/* 📌 Imagen del producto */
-.product-image {
-  width: 100%;
-  max-height: 180px;
-  overflow: hidden;
-  border-radius: 10px;
-  border: 2px solid #ffcc00;
-
-  img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    transition: transform 0.3s;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-}
-
-/* 📌 Información del producto */
-.product-info {
-  padding: 10px 0;
-
   h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    color: #ffcc00;
+    color: #333;
+    margin: 5px 0;
   }
 
   .product-description {
-    font-size: 1rem;
-    color: #ccc;
-    margin: 5px 0;
-    line-height: 1.4;
+    font-size: 0.9rem;
+    color: #666;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .price {
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-weight: bold;
     color: #ffcc00;
+    margin-top: 5px;
   }
 }
 
-/* 📌 Modal */
+/* 🖥️ Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -95,31 +183,18 @@
 }
 
 .modal-content {
-  background: #2c3034;
+  background: white;
   padding: 25px;
-  border-radius: 15px;
-  width: 30%;
-  max-height: 90vh;
-  overflow-y: auto;
+  border-radius: 10px;
+  width: 400px;
   text-align: center;
   border: 3px solid #ffcc00;
-  color: #ffcc00;
+  color: #333;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.image-preview {
-  width: 100%;
-  max-width: 80%;
-  max-height: 300px;
-  object-fit: contain;
-  margin-top: 10px;
-  border-radius: 10px;
-  padding: 5px;
-}
-
-/* 📌 Botón de cerrar modal */
 .icon-cancel {
   color: red;
   font-size: 1.8rem;
@@ -140,6 +215,7 @@
   to { opacity: 1; }
 }
 
+/* 📱 Media Queries */
 @media (max-width: 1024px) {
   .modal-content {
     width: 60%;
@@ -147,6 +223,12 @@
 }
 
 @media (max-width: 768px) {
+  .filters-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
   .modal-content {
     width: 90%;
   }

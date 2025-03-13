@@ -79,14 +79,19 @@ public class ProductController {
             return ResponseEntity.badRequest().build();
         }
     }
-
-
-
-
     // 🔍 Buscar productos por nombre
     @GetMapping("/search")
     public ResponseEntity<List<Product>> searchProducts(@RequestParam String name) {
         List<Product> products = productService.searchProductsByName(name);
+        return ResponseEntity.ok(products);
+    }
+
+    // 🔹 Filtrar productos por rango de precios
+    @GetMapping("/filter")
+    public ResponseEntity<List<Product>> filterProductsByPrice(
+            @RequestParam BigDecimal minPrice,
+            @RequestParam BigDecimal maxPrice) {
+        List<Product> products = productService.getProductsByPriceRange(minPrice, maxPrice);
         return ResponseEntity.ok(products);
     }
     @GetMapping
