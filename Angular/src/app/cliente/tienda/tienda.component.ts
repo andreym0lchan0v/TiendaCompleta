@@ -13,6 +13,8 @@ import { CommonModule } from '@angular/common';
 })
 export class TiendaComponent implements OnInit {
   products: ProductInterface[] = [];
+  selectedProduct: ProductInterface | null = null; // Para mostrar en el modal
+  showModal: boolean = false;
 
   constructor(private productService: ProductService) {}
 
@@ -23,11 +25,23 @@ export class TiendaComponent implements OnInit {
   loadProducts() {
     this.productService.getAllProducts().subscribe({
       next: (products) => {
+        console.log("📦 Productos cargados:", products);
         this.products = products;
       },
-      error: () => {
-        console.error('Error al cargar los productos');
+      error: (error) => {
+        console.error("❌ Error al cargar los productos", error);
       }
     });
+  }
+
+
+  openModal(product: ProductInterface) {
+    this.selectedProduct = product;
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.selectedProduct = null;
   }
 }

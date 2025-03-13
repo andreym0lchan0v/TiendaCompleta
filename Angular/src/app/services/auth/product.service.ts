@@ -18,10 +18,17 @@ export class ProductService {
 
   // 🔍 Obtener todos los productos
   getAllProducts(): Observable<ProductInterface[]> {
-    return this.http.get<ProductInterface[]>(this.apiUrl);
+    const token = this.tokenService.getAccessToken();
+
+    return this.http.get<ProductInterface[]>(this.apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`, // ✅ Enviar token
+        "Content-Type": "application/json"
+      }
+    });
   }
 
-  // 🔍 Obtener productos de un usuario en particular
+
   // 🔹 Obtener productos de un usuario
 getUserProducts(username: string): Observable<ProductInterface[]> {
   const token = this.tokenService.getAccessToken();

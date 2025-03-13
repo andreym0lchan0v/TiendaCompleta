@@ -1,15 +1,37 @@
 <div class="tienda-container">
   <h2>Tienda</h2>
 
-  <div class="product-list">
-    <div *ngFor="let product of products" class="product-card">
-      <h4>{{ product.name }}</h4>
-      <p>{{ product.description }}</p>
-      <p>Precio: {{ product.price }} {{ product.currency }}</p>
-      <p>Publicado por: {{ product.sellerUsername }}</p>
-      <img *ngIf="product.image" [src]="'data:image/png;base64,' + product.image" alt="Imagen del producto">
+  <!-- Grid de productos -->
+  <div class="product-grid">
+    <div *ngFor="let product of products" class="product-card" (click)="openModal(product)">
+      <div class="product-image">
+        <img *ngIf="product.image" [src]="'data:image/png;base64,' + product.image" alt="Imagen del producto">
+      </div>
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+        <p class="product-description">{{ product.description }}</p>
+        <p class="price">Precio: {{ product.price }} {{ product.currency }}</p>
+        <p>Publicado por: <strong>{{ product.sellerUsername || 'Desconocido' }}</strong></p>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- Modal para ver detalles del producto -->
+<div class="modal-overlay" *ngIf="showModal">
+  <div class="modal-content">
+    <span class="icon-cancel" (click)="closeModal()">✖</span>
+    <h3>{{ selectedProduct?.name }}</h3>
+    <img *ngIf="selectedProduct?.image" class="image-preview"
+         [src]="'data:image/png;base64,'"
+         alt="Imagen del producto">
+    <p><strong>Descripción:</strong> {{ selectedProduct?.description }}</p>
+    <p><strong>Precio:</strong> {{ selectedProduct?.price }} {{ selectedProduct?.currency }}</p>
+    <p><strong>Vendedor:</strong> {{ selectedProduct?.sellerUsername || 'Desconocido' }}</p>
+  </div>
+</div>
+
 <app-cart></app-cart>
+
+
+<!-- + selectedProduct.image -->

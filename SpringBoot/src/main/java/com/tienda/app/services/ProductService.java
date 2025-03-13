@@ -1,5 +1,6 @@
 package com.tienda.app.services;
 
+import com.tienda.app.enums.Currency;
 import com.tienda.app.models.Product;
 import com.tienda.app.models.User;
 import com.tienda.app.repositories.ProductRepository;
@@ -29,9 +30,17 @@ public class ProductService {
     public Product createProduct(String name, String description, MultipartFile image,
                                  BigDecimal price, double tax, String currency) throws IOException {
 
-        // Obtener el usuario autenticado
+        // Validar moneda antes de asignarla
+        try {
+            currency = currency.toUpperCase();
+            Currency currencyEnum = Currency.valueOf(currency);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("❌ Moneda no válida: " + currency);
+        }
+
+        // Obtener usuario autenticado
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName(); // ✅ Obtener usuario autenticado
+        String username = authentication.getName();
         System.out.println("Usuario autenticado creando producto: " + username);
 
         User user = userRepository.findByUsername(username)
@@ -47,29 +56,39 @@ public class ProductService {
         product.setImage(imageBase64);
         product.setPrice(price);
         product.setTax(tax);
-        product.setCurrency(com.tienda.app.enums.Currency.valueOf(currency));
-        product.setSeller(user); // ✅ Asignar correctamente el vendedor
+        product.setCurrency(Currency.valueOf(currency));
+        product.setSeller(user);
 
-        Product savedProduct = productRepository.save(product);
-
-        // 🔥 Verificar que el vendedor se guarda bien
-        System.out.println("Producto guardado con vendedor: " + savedProduct.getSeller().getUsername());
-
-        return savedProduct;
+        return productRepository.save(product);
     }
 
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 
-    // 🔍 Obtener productos por usuario
+    // 🔹 Obtener productos en un rango de precios
+    public List<Product> getProductsByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
+        return productRepository.findByPriceBetween(minPrice, maxPrice);
+    }
+
+    // 🔹 Obtener productos recientes (ordenados por fecha de creación)
+    public List<Product> getRecentProducts() {
+        return productRepository.findTop10ByOrderByCreatedAtDesc();
+    }
+
+    // 🔹 Obtener productos por tipo de moneda
+    public List<Product> getProductsByCurrency(String currency) {
+        return productRepository.findByCurrency(Currency.valueOf(currency.toUpperCase()));
+    }
+
     public List<Product> getProductsBySeller(String username) {
         return productRepository.findBySellerUsername(username);
     }
 
-    // 🔍 Buscar productos por nombre
     public List<Product> searchProductsByName(String name) {
         return productRepository.findByNameContainingIgnoreCase(name);
     }
 
-    // 🔄 Modificar producto
     public Product updateProduct(Long id, String name, String description, MultipartFile image,
                                  BigDecimal price, double tax, String currency) throws IOException {
         Product product = productRepository.findById(id)
@@ -82,12 +101,11 @@ public class ProductService {
         }
         product.setPrice(price);
         product.setTax(tax);
-        product.setCurrency(com.tienda.app.enums.Currency.valueOf(currency));
+        product.setCurrency(Currency.valueOf(currency.toUpperCase()));
 
         return productRepository.save(product);
     }
 
-    // ❌ Eliminar producto
     public void deleteProduct(Long id) {
         if (!productRepository.existsById(id)) {
             throw new IllegalArgumentException("❌ El producto no existe en la base de datos");
@@ -99,5 +117,4 @@ public class ProductService {
             throw new RuntimeException("❌ Error al eliminar el producto: " + e.getMessage());
         }
     }
-
 }

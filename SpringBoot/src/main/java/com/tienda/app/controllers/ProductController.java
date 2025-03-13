@@ -4,6 +4,8 @@ import com.tienda.app.models.Product;
 import com.tienda.app.services.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -87,6 +89,27 @@ public class ProductController {
         List<Product> products = productService.searchProductsByName(name);
         return ResponseEntity.ok(products);
     }
+    @GetMapping
+    public ResponseEntity<List<Map<String, Object>>> getAllProducts() {
+        List<Product> products = productService.getAllProducts();
+
+        List<Map<String, Object>> productResponses = products.stream().map(product -> {
+            Map<String, Object> productMap = new HashMap<>();
+            productMap.put("id", product.getId());
+            productMap.put("name", product.getName());
+            productMap.put("description", product.getDescription());
+            productMap.put("price", product.getPrice());
+            productMap.put("tax", product.getTax());
+            productMap.put("currency", product.getCurrency().name());
+            productMap.put("image", product.getImage());
+            productMap.put("sellerUsername", product.getSeller() != null ? product.getSeller().getUsername() : "Desconocido");
+            return productMap;
+        }).toList();
+
+        return ResponseEntity.ok(productResponses);
+    }
+
+
 
     // 🔄 Modificar producto
     @PutMapping("/update/{id}")

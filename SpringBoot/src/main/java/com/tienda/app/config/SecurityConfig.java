@@ -59,10 +59,11 @@ public class SecurityConfig {
                                 "/users/register",
                                 "/users/check-token",
                                 "/users/change-password",
-                                "/products",
+                                "/products/",
                                 "/products/create",
                                 "/products/update/**",
-                                "/products/delete/**"
+                                "/products/delete/**",
+                                "/products/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
