@@ -1,4 +1,4 @@
-/* 📌 Contenedor principal */
+/* 📌 Estilos generales */
 .tienda-container {
   padding: 40px;
   background: #f8f9fa;
@@ -7,7 +7,40 @@
   align-items: center;
   width: 100%;
 }
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  color: #212529;
+  letter-spacing: 3px;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2%;
+  padding: 10px 20px;
+  background: linear-gradient(to right, #ffcc00, #ff8800);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease-in-out;
 
+  /* 🌟 Efecto de hover */
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  /* 🔹 Línea decorativa debajo del título */
+  &::after {
+    content: "";
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, #ffcc00, #ff8800);
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    border-radius: 5px;
+    animation: pulseGlow 1.5s infinite alternate;
+  }
+}
 /* 📌 Barra de búsqueda y filtros en línea */
 .filters-container {
   display: flex;
@@ -34,6 +67,8 @@
     margin-right: 10px;
     font-size: 1.2rem;
   }
+  /* 📦 Icono de carrito en cada producto */
+
 
   input {
     border: none;
@@ -123,25 +158,32 @@
 /* 📦 Grid de productos */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
 }
 
-/* 📦 Tarjetas de productos alineadas */
+/* 📦 Tarjetas de productos */
 .product-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
   background: white;
   border-radius: 12px;
   padding: 15px;
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  height: 250px; /* Altura uniforme */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 
   h3 {
     font-size: 1.2rem;
@@ -153,10 +195,10 @@
   .product-description {
     font-size: 0.9rem;
     color: #666;
-    max-width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 90%;
   }
 
   .price {
@@ -165,9 +207,57 @@
     color: #ffcc00;
     margin-top: 5px;
   }
+
+  /* 📸 Imagen del producto */
+  .cart-img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  /* 🛒 Botón de añadir al carrito */
+  .btn-add-cart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffcc00;
+    color: #212529;
+    border: none;
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      background: #e6b800;
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    i {
+      font-size: 20px;
+      color: #212529;
+    }
+  }
 }
 
-/* 🖥️ Modal */
+/* 🖥️ Modal de producto */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -185,43 +275,70 @@
 .modal-content {
   background: white;
   padding: 25px;
-  border-radius: 10px;
-  width: 400px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
   text-align: center;
   border: 3px solid #ffcc00;
   color: #333;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+  position: relative;
 
-.icon-cancel {
-  color: red;
-  font-size: 1.8rem;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  transition: color 0.3s ease-in-out;
+  /* 📸 Imagen en el modal */
+  .cart-img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease-in-out;
 
-  &:hover {
-    color: darkred;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  /* ❌ Botón de cerrar */
+  .icon-cancel {
+    color: red;
+    font-size: 1.8rem;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: darkred;
+    }
   }
 }
 
 /* 📌 Animaciones */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* 📱 Media Queries */
-@media (max-width: 1024px) {
-  .modal-content {
-    width: 60%;
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
+/* 📱 Responsive Design */
 @media (max-width: 768px) {
   .filters-container {
     flex-direction: column;
@@ -229,7 +346,11 @@
     gap: 15px;
   }
 
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
   .modal-content {
-    width: 90%;
+    width: 95%;
   }
 }

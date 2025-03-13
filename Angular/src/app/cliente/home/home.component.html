@@ -1,1 +1,74 @@
-<p>home works!</p>
+<div class="home-container">
+  <!--  Hero Section -->
+  <section class="hero">
+    <h1>Bienvenido a <span class="brand">TiendaOnline</span></h1>
+    <p>Encuentra las mejores ofertas en productos exclusivos.</p>
+    <a routerLink="/tienda" class="btn-primary">Explorar Productos</a>
+  </section>
+
+  <!--  Categorías Destacadas -->
+  <section class="categories">
+    <h2>Categorías Destacadas</h2>
+    <div class="category-grid">
+      <div class="category-card" routerLink="/tienda">
+        <img src="/dunk.jpg" alt="Zapatillas">
+        <h3>Zapatillas</h3>
+      </div>
+      <div class="category-card" routerLink="/tienda">
+        <img src="/backdunk.jpg" alt="Ropa">
+        <h3>Ropa</h3>
+      </div>
+      <div class="category-card" routerLink="/tienda">
+        <img src="/nikedunk.jpg" alt="Accesorios">
+        <h3>Accesorios</h3>
+      </div>
+    </div>
+  </section>
+
+  <!--  Beneficios de la Tienda -->
+  <section class="benefits">
+    <div class="benefit-card">
+      <i class="bi bi-truck"></i>
+      <h3>Envíos Rápidos</h3>
+      <p>Recibe tu compra en 24-48 horas.</p>
+    </div>
+    <div class="benefit-card">
+      <i class="bi bi-shield-lock"></i>
+      <h3>Pago Seguro</h3>
+      <p>100% seguro con encriptación avanzada.</p>
+    </div>
+    <div class="benefit-card">
+      <i class="bi bi-award"></i>
+      <h3>Calidad 100%</h3>
+      <p>Productos originales y garantizados.</p>
+    </div>
+  </section>
+
+  <!--  Testimonios -->
+  <section class="testimonials">
+    <h2>Lo que dicen nuestros clientes</h2>
+    <div class="testimonial-slider">
+      <div class="testimonial-card">
+        <p>"Excelente calidad y envío rápido. ¡Volveré a comprar!"</p>
+        <h4>- Carlos M.</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>"La mejor tienda online. Precios increíbles y atención 10/10."</p>
+        <h4>- Laura G.</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>"Gran variedad de productos y atención excelente."</p>
+        <h4>- Andrés P.</h4>
+      </div>
+    </div>
+  </section>
+
+  <!--  CTA de Suscripción -->
+  <section class="cta">
+    <h2>Recibe Ofertas Exclusivas</h2>
+    <p>Suscríbete a nuestro boletín y obtén descuentos especiales.</p>
+    <input type="email" placeholder="Tu correo electrónico">
+    <button class="btn-primary">Suscribirme</button>
+  </section>
+</div>
+<app-footer></app-footer>

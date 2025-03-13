@@ -1,0 +1,154 @@
+footer {
+  height: 10%;
+  z-index: 100;
+  background-color: #212529;
+
+  .icon-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .icon-container {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+
+    i {
+      font-size: 1.5rem;
+      color: #ffcc00 !important;
+      transition: color 0.3s ease-in-out;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:hover i {
+      color: white;
+    }
+
+    &:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      color: black;
+      padding: 6px 12px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: bold;
+      box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+
+    &:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+/* 📱 Ajustes para tablets (768px a 1024px) */
+@media (max-width: 1024px) {
+  footer {
+    height: auto;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .icon-group {
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .icon-container {
+    width: 45px;
+    height: 45px;
+
+    i {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+/* 📲 Ajustes para pantallas pequeñas (móviles y tablets pequeñas - 480px a 768px) */
+@media (max-width: 768px) {
+  footer {
+    height: auto;
+    padding: 15px 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .icon-group {
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .icon-container {
+    width: 40px;
+    height: 40px;
+
+    i {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+/* 📲 Ajustes para móviles pequeños (menos de 480px) */
+@media (max-width: 480px) {
+  footer {
+    height: auto;
+    padding: 10px 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .icon-group {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .icon-container {
+    width: 35px;
+    height: 35px;
+
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  a {
+    font-size: 0.9rem;
+  }
+}
+

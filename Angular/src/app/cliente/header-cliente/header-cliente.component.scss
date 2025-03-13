@@ -1,18 +1,32 @@
-/* Estilos generales */
+
+/* Variables */
+$color-primary: #ffcc00;
+$color-bg: #2c3034;
+$color-text: white;
+$breakpoints: (
+  xs: 350px,
+  sm: 576px,
+  md: 769px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+/* Reset */
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
   background: #1e1e2d;
-  color: white;
+  color: $color-text;
 }
 
-/* Estilos del Header */
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #2c3034;
+  background: $color-bg;
   padding: 12px 20px;
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
   position: sticky;
@@ -28,66 +42,67 @@ body {
   max-width: 180px;
 }
 
-/* Navegación */
+/* Menú navegación */
 .nav-container {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
+/* Ítems del menú */
 .nav-container a {
-  color: #ffcc00;
+  color: $color-primary;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 600;
   padding: 5px 10px;
   transition: all 0.3s ease-in-out;
-}
 
-.nav-container a:hover {
-  color: white;
-  transform: translateY(-2px);
+  &:hover {
+    color: white;
+    transform: translateY(-2px);
+  }
 }
 
 /* Ícono del carrito */
 .cart-icon i {
   font-size: 1.5rem;
-  color: #ffcc00;
+  color: $color-primary;
   transition: transform 0.3s ease-in-out;
-}
 
-.cart-icon:hover {
-  transform: scale(1.2);
-  color: white;
+  &:hover {
+    transform: scale(1.2);
+    color: white;
+  }
 }
 
 /* Botón de inicio de sesión */
 .btn-login {
   background: none;
-  color: #ffcc00;
+  color: $color-primary;
   font-size: 1rem;
   font-weight: bold;
   padding: 8px 12px;
   border-radius: 5px;
-  border: 2px solid #ffcc00;
+  border: 2px solid $color-primary;
   display: flex;
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+
+  i {
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    background: $color-primary;
+    color: #212529;
+    transform: scale(1.05);
+  }
 }
 
-.btn-login i {
-  font-size: 1.2rem;
-}
-
-.btn-login:hover {
-  background: #ffcc00;
-  color: #212529;
-  transform: scale(1.05);
-}
-
-/* Estilos generales del mensaje "¡Hola, username!" */
+/* Estilos usuario autenticado */
 .user-info {
   display: flex;
   align-items: center;
@@ -95,61 +110,59 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   margin-left: 40px;
-  background: #ffcc00;
+  background: $color-primary;
   padding: 16px 24px;
   border-radius: 14px;
   box-shadow: 0px 0px 15px rgba(255, 204, 0, 0.7);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
+
+  &:hover {
+    transform: scale(1.06);
+    box-shadow: 0px 0px 22px rgba(255, 204, 0, 0.9);
+  }
 }
 
-.user-info:hover {
-  transform: scale(1.06);
-  box-shadow: 0px 0px 22px rgba(255, 204, 0, 0.9);
+/* Menú hamburguesa */
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  color: $color-primary;
+  cursor: pointer;
 }
 
 /* Responsividad */
-@media (max-width: 992px) {
+@media (max-width: map-get($breakpoints, md)) {
   .header {
     flex-direction: column;
-    padding: 10px;
     text-align: center;
   }
-  .nav-container {
-    flex-direction: column;
-    gap: 15px;
+
+  .menu-toggle {
+    display: block;
   }
-  .btn-login {
+
+  .nav-container {
+    display: none;
+    flex-direction: column;
+    background: $color-bg;
+    position: absolute;
+    top: 60px;
+    right: 0;
     width: 100%;
-    text-align: center;
-  }
-}
+    padding: 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
 
-@media (max-width: 768px) {
-  .header {
-    padding: 8px;
+    &.active {
+      display: flex;
+      transform: translateY(0);
+    }
   }
-  .logo-container img {
-    max-width: 140px;
-  }
-  .nav-container a {
-    font-size: 0.9rem;
-  }
-  .cart-icon i {
-    font-size: 1.3rem;
-  }
-}
 
-@media (max-width: 576px) {
-  .header {
-    padding: 6px;
-  }
-  .logo-container img {
-    max-width: 120px;
-  }
-  .nav-container {
-    flex-wrap: wrap;
-    justify-content: center;
+  .user-info {
+    font-size: 1rem;
+    padding: 8px 12px;
   }
 }

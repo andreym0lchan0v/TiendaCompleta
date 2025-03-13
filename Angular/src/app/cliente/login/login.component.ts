@@ -8,12 +8,14 @@ import {Router, RouterLink} from '@angular/router';
 import { NgClass } from '@angular/common';
 import { UserServiceService } from '../../services/auth/user-service.service';
 import { PopupService } from '../../services/utils/popup.service';
+import { FooterComponent } from "../../footer/footer.component";
 
 @Component({
   selector: 'app-login',
   imports: [
-    ReactiveFormsModule,RouterLink,NgClass
-  ],
+    ReactiveFormsModule, RouterLink, NgClass,
+    FooterComponent
+],
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'

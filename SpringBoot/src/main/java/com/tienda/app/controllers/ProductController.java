@@ -29,7 +29,7 @@ public class ProductController {
     // 🔹 Crear producto con imagen (JSON Body)
     @PostMapping("/create")
     public ResponseEntity<Product> createProduct(@RequestBody Map<String, Object> payload) {
-        System.out.println("🚀 Datos recibidos en el backend: " + payload);
+        System.out.println(" Datos recibidos en el backend: " + payload);
 
         try {
             // Extraer datos del JSON recibido
@@ -40,13 +40,13 @@ public class ProductController {
             String currency = (String) payload.get("currency");
 
             // Verifica si los datos son correctos
-            System.out.println("📌 Creando producto: " + name + " - " + price + " " + currency);
+            System.out.println(" Creando producto: " + name + " - " + price + " " + currency);
 
             // Guardar producto en la BD
             Product newProduct = productService.createProduct(name, description, null, price, tax, currency);
             return ResponseEntity.ok(newProduct);
         } catch (Exception e) {
-            System.err.println("❌ Error al procesar los datos: " + e.getMessage());
+            System.err.println(" Error al procesar los datos: " + e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }
@@ -54,7 +54,7 @@ public class ProductController {
     // 🔹 Obtener productos de un usuario
     @GetMapping("/by-seller/{username}")
     public ResponseEntity<List<Map<String, Object>>> getProductsBySeller(@PathVariable String username) {
-        System.out.println("📌 Buscando productos del vendedor: " + username);
+        System.out.println(" Buscando productos del vendedor: " + username);
 
         try {
             List<Product> products = productService.getProductsBySeller(username);
@@ -79,14 +79,14 @@ public class ProductController {
             return ResponseEntity.badRequest().build();
         }
     }
-    // 🔍 Buscar productos por nombre
+    // Buscar productos por nombre
     @GetMapping("/search")
     public ResponseEntity<List<Product>> searchProducts(@RequestParam String name) {
         List<Product> products = productService.searchProductsByName(name);
         return ResponseEntity.ok(products);
     }
 
-    // 🔹 Filtrar productos por rango de precios
+    // Filtrar productos por rango de precios
     @GetMapping("/filter")
     public ResponseEntity<List<Product>> filterProductsByPrice(
             @RequestParam BigDecimal minPrice,
@@ -116,7 +116,7 @@ public class ProductController {
 
 
 
-    // 🔄 Modificar producto
+    // Modificar producto
     @PutMapping("/update/{id}")
     public ResponseEntity<Product> updateProduct(
             @PathVariable Long id,
@@ -131,7 +131,7 @@ public class ProductController {
         return ResponseEntity.ok(updatedProduct);
     }
 
-    // ❌ Eliminar producto
+    // Eliminar producto
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable Long id) {
         try {

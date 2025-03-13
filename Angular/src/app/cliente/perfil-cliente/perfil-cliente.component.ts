@@ -7,10 +7,12 @@ import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CartComponent } from '../cart/cart.component';
+import { FooterComponent } from "../../footer/footer.component";
 
 @Component({
   selector: 'app-perfil-cliente',
-  imports: [CommonModule,RouterLink,FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, FooterComponent],
   templateUrl: './perfil-cliente.component.html',
   styleUrl: './perfil-cliente.component.scss'
 })
@@ -34,7 +36,7 @@ export class PerfilClienteComponent implements OnInit {
     private router: Router,
     private popupService: PopupService,
     private userService: UserServiceService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -117,7 +119,6 @@ export class PerfilClienteComponent implements OnInit {
 
       this.tokenService.removeToken();
       this.userService.removeSession();
-
       setTimeout(() => {
         this.router.navigate(['/']).then(() => {
           window.location.reload();

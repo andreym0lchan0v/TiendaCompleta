@@ -5,12 +5,14 @@ import { UserInterface } from '../../services/interfaces/auth';
 import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { PopupService } from '../../services/utils/popup.service';
+import { FooterComponent } from "../../footer/footer.component";
 
 @Component({
   selector: 'app-registro',
   imports: [
-    ReactiveFormsModule, NgClass
-  ],
+    ReactiveFormsModule, NgClass,
+    FooterComponent
+],
   standalone: true,
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.scss'

@@ -4,10 +4,13 @@ import { ProductService } from '../../services/auth/product.service';
 import { ProductInterface } from '../../services/interfaces/product';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../services/auth/cart.service';
+import { FooterComponent } from "../../footer/footer.component";
+import { PopupService } from '../../services/utils/popup.service';
 
 @Component({
   selector: 'app-tienda',
-  imports: [CartComponent,CommonModule,FormsModule],
+  imports: [CartComponent, CommonModule, FormsModule, FooterComponent],
   standalone: true,
   templateUrl: './tienda.component.html',
   styleUrl: './tienda.component.scss'
@@ -23,10 +26,22 @@ export class TiendaComponent implements OnInit {
   selectedProduct: ProductInterface | null = null;
   showModal: boolean = false;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService,
+    private popUpService: PopupService
+    ) {}
 
   ngOnInit(): void {
     this.loadProducts();
+  }
+  addToCart(product: ProductInterface, event: Event) {
+    event.stopPropagation(); // Evitar que se abra el modal al hacer clic en el carrito
+    this.cartService.addToCart(product);
+    this.popUpService.showMessage(
+    "Producto añadido",
+    `🛒 ${product.name} ha sido agregado al carrito.`,
+    "success")
   }
 
   loadProducts() {

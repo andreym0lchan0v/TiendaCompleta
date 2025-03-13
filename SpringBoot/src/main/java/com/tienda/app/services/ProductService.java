@@ -35,7 +35,7 @@ public class ProductService {
             currency = currency.toUpperCase();
             Currency currencyEnum = Currency.valueOf(currency);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("❌ Moneda no válida: " + currency);
+            throw new IllegalArgumentException(" Moneda no válida: " + currency);
         }
 
         // Obtener usuario autenticado
@@ -92,7 +92,7 @@ public class ProductService {
     public Product updateProduct(Long id, String name, String description, MultipartFile image,
                                  BigDecimal price, double tax, String currency) throws IOException {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("❌ Producto no encontrado"));
+                .orElseThrow(() -> new IllegalArgumentException(" Producto no encontrado"));
 
         product.setName(name);
         product.setDescription(description);
@@ -108,13 +108,13 @@ public class ProductService {
 
     public void deleteProduct(Long id) {
         if (!productRepository.existsById(id)) {
-            throw new IllegalArgumentException("❌ El producto no existe en la base de datos");
+            throw new IllegalArgumentException(" El producto no existe en la base de datos");
         }
         try {
             productRepository.deleteById(id);
             System.out.println("✅ Producto eliminado con éxito: ID " + id);
         } catch (Exception e) {
-            throw new RuntimeException("❌ Error al eliminar el producto: " + e.getMessage());
+            throw new RuntimeException(" Error al eliminar el producto: " + e.getMessage());
         }
     }
 }

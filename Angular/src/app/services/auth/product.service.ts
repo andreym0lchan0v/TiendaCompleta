@@ -16,20 +16,20 @@ export class ProductService {
     private tokenService: TokenService
   ) {}
 
-  // 🔍 Obtener todos los productos
+  //  Obtener todos los productos
   getAllProducts(): Observable<ProductInterface[]> {
     const token = this.tokenService.getAccessToken();
 
     return this.http.get<ProductInterface[]>(this.apiUrl, {
       headers: {
-        Authorization: `Bearer ${token}`, // ✅ Enviar token
+        Authorization: `Bearer ${token}`, //  Enviar token
         "Content-Type": "application/json"
       }
     });
   }
 
 
-  // 🔹 Obtener productos de un usuario
+  //  Obtener productos de un usuario
 getUserProducts(username: string): Observable<ProductInterface[]> {
   const token = this.tokenService.getAccessToken();
 
@@ -42,7 +42,7 @@ getUserProducts(username: string): Observable<ProductInterface[]> {
     map(products =>
       products.map(product => ({
         ...product,
-        sellerUsername: product.sellerUsername || 'Desconocido' // ✅ Asegura que nunca sea null
+        sellerUsername: product.sellerUsername || 'Desconocido' //  Asegura que nunca sea null
       }))
     )
   );
@@ -50,12 +50,12 @@ getUserProducts(username: string): Observable<ProductInterface[]> {
 
 
 
-  // 🔍 Buscar productos por nombre
+  //  Buscar productos por nombre
   searchProductsByName(name: string): Observable<ProductInterface[]> {
     return this.http.get<ProductInterface[]>(`${this.apiUrl}/search?name=${name}`);
   }
 
-  // 🆕 Crear un nuevo producto (Ahora incluye `sellerUsername`)
+  //  Crear un nuevo producto (Ahora incluye `sellerUsername`)
   createProduct(product: any): Observable<any> {
     const token = this.tokenService.getAccessToken();
     return this.http.post(`${this.apiUrl}/create`, product, {
@@ -67,7 +67,7 @@ getUserProducts(username: string): Observable<ProductInterface[]> {
   }
 
 
-  // 🔄 Actualizar un producto existente
+  //  Actualizar un producto existente
   updateProduct(id: number, product: any): Observable<any> {
     const token = this.tokenService.getAccessToken();
 
@@ -97,7 +97,7 @@ getUserProducts(username: string): Observable<ProductInterface[]> {
         }
       }),
       catchError(error => {
-        console.error("❌ Error al eliminar producto:", error);
+        console.error(" Error al eliminar producto:", error);
         return throwError(() => new Error("Error al eliminar el producto"));
       })
     );

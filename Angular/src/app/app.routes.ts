@@ -15,6 +15,8 @@ import { PerfilComponent } from './backoffice/perfil/perfil.component';
 import { ProductosComponent } from './backoffice/productos/productos.component';
 import { roleGuard } from './services/guards/role.guard';
 import { PerfilClienteComponent } from './cliente/perfil-cliente/perfil-cliente.component';
+import { CartComponent } from './cliente/cart/cart.component';
+import { CheckoutComponent } from './cliente/checkout/checkout.component';
 
 export const routes: Routes = [
 
@@ -26,7 +28,8 @@ export const routes: Routes = [
       {path: "login", component: LoginComponent, canActivate: [publicGuard]}, // -> www.ejemplo.com/login
       {path: "registro", component: RegistroComponent, canActivate: [publicGuard]}, // -> www.ejemplo.com/registro
       {path: "tienda", component: TiendaComponent}, // www.ejemplo.com/tienda
-      {path: "perfil", component: PerfilClienteComponent, canActivate: [authGuard]}
+      {path: "perfil", component: PerfilClienteComponent, canActivate: [authGuard]},
+      {path: "checkout", component: CheckoutComponent, canActivate: [authGuard]}
     ]
   },
   // backoffice
