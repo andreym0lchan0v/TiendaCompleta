@@ -1,5 +1,5 @@
 <div class="tienda-container">
-  <h2 class="title">Tienda online</h2>
+  <h2 class="title">Productos</h2>
 
   <!-- Barra de búsqueda y slider en línea -->
   <div class="filters-container">
@@ -28,7 +28,8 @@
         <img src="/nikedunk.jpg" alt="Imagen del producto" class="cart-img">
         <h3>{{ product.name }}</h3>
         <p class="product-description">{{ product.description.length > 15 ? (product.description | slice:0:15) + '...' : product.description }}</p>
-        <p class="price">Precio: {{ product.price }} {{ product.currency }}</p>
+        <p class="price">Precio: {{ product.price}} {{ product.currency }}</p>
+        <p class="price">Tax: {{product.tax }} {{ product.currency }}</p>
         <p>Publicado por: <strong>{{ product.sellerUsername || 'Desconocido' }}</strong></p>
         <button class="btn-add-cart" (click)="addToCart(product, $event)">
           <i class="bi bi-cart-plus"></i>
@@ -48,6 +49,7 @@
     <h3>{{ selectedProduct?.name }}</h3>
     <p><strong>Descripción:</strong> {{ selectedProduct?.description }}</p>
     <p><strong>Precio:</strong> {{ selectedProduct?.price }} {{ selectedProduct?.currency }}</p>
+    <p><strong>Tax:</strong> {{ selectedProduct?.tax }} {{ selectedProduct?.currency }}</p>
     <p><strong>Vendedor:</strong> {{ selectedProduct?.sellerUsername || 'Desconocido' }}</p>
   </div>
 </div>

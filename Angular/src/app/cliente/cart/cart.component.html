@@ -20,9 +20,8 @@
       <div class="cart-info">
         <h3>{{ product.name }}</h3>
         <p class="price">
-          Precio: {{ product.currency === 'EUR' ? (product.price * 1.10) : product.price }} USD
+          Precio: {{ product.currency === 'EUR' ? (product.price * 1.10 + product.tax * 1.10) : product.price + product.tax}} USD
         </p>
-
         <div class="quantity-controls">
           <button (click)="decreaseQuantity(product.id)" class="btn-quantity"><i class="bi bi-dash-circle"></i></button>
           <span class="quantity">{{ product.quantity }}</span>

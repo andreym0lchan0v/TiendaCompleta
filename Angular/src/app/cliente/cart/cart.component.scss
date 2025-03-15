@@ -1,5 +1,5 @@
 
-/* 🔹 Overlay al abrir el carrito */
+/* Overlay al abrir el carrito */
 .cart-overlay {
   position: fixed;
   top: 0;
@@ -19,7 +19,7 @@
 }
 
 
-/* 🔹 Sidebar del carrito */
+/* Sidebar del carrito */
 .cart-sidebar {
   position: fixed;
   top: 0;
@@ -49,7 +49,7 @@
   }
 }
 
-/* 🔴 Botón para cerrar el carrito */
+/* Botón para cerrar el carrito */
 .close-btn {
   position: absolute;
   top: 15px;
@@ -67,7 +67,7 @@
   }
 }
 
-/* 🛒 Lista de productos en el carrito */
+/* Lista de productos en el carrito */
 .cart-list {
   flex-grow: 1;
   max-height: 70vh;
@@ -84,7 +84,7 @@
   }
 }
 
-/* 🛍️ Cada item del carrito */
+/* Cada item del carrito */
 .cart-item {
   display: flex;
   background: #2c3034;
@@ -124,7 +124,7 @@
     }
   }
 
-  /* 🎚️ Controles de cantidad */
+  /* Controles de cantidad */
   .quantity-controls {
     display: flex;
     align-items: center;
@@ -155,7 +155,7 @@
   }
 }
 
-/* 🗑️ Botón para eliminar un producto */
+/* Botón para eliminar un producto */
 .btn-remove {
   background: none;
   border: none;
@@ -177,7 +177,7 @@
   }
 }
 
-/* 🛒 Total del carrito */
+/* Total del carrito */
 .cart-total {
   display: flex;
   flex-direction: column;
@@ -230,7 +230,7 @@
     }
   }
 
-  /* 🧹 Botón para vaciar el carrito */
+  /* Botón para vaciar el carrito */
   .btn-clear {
     background: none;
     border: 2px solid #ffcc00;
@@ -252,7 +252,7 @@
     }
   }
 }
-/* 📱 Móviles muy pequeños (hasta 375px) */
+/* Móviles muy pequeños (hasta 375px) */
 @media (max-width: 375px) {
   .cart-sidebar {
     width: 100%;
@@ -272,7 +272,7 @@
   }
 }
 
-/* 📱 Móviles pequeños (576px - sm) */
+/* Móviles pequeños (576px - sm) */
 @media (max-width: 576px) {
   .cart-sidebar {
     width: 100%;
@@ -292,7 +292,7 @@
   }
 }
 
-/* 📱 Tablets pequeñas y móviles grandes (769px - md) */
+/* Tablets pequeñas y móviles grandes (769px - md) */
 @media (max-width: 769px) {
   .cart-sidebar {
     width: 80%;
@@ -313,7 +313,7 @@
   }
 }
 
-/* 📱 Tablets grandes y móviles landscape (992px - lg) */
+/* Tablets grandes y móviles landscape (992px - lg) */
 @media (max-width: 992px) {
   .cart-sidebar {
     width: 60%;
@@ -324,22 +324,22 @@
   }
 }
 
-/* 💻 Laptops pequeñas y iPads (1200px - xl) */
+/* Laptops pequeñas y iPads (1200px - xl) */
 @media (max-width: 1200px) {
   .cart-sidebar {
-    width: 50%;
-    right: -50%;
+    width: 40%;
+    right: -40%;
   }
   .cart-sidebar.active {
     right: 0;
   }
 }
 
-/* 💻 Pantallas grandes y monitores (1400px - xxl) */
+/* Pantallas grandes y monitores (1400px - xxl) */
 @media (max-width: 1400px) {
   .cart-sidebar {
-    width: 40%;
-    right: -40%;
+    width: 30%;
+    right: -30%;
   }
   .cart-sidebar.active {
     right: 0;

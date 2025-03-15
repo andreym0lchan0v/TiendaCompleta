@@ -26,7 +26,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    // 🔹 Crear producto con imagen (JSON Body)
+    // Crear producto con imagen (JSON Body)
     @PostMapping("/create")
     public ResponseEntity<Product> createProduct(@RequestBody Map<String, Object> payload) {
         System.out.println(" Datos recibidos en el backend: " + payload);
@@ -51,7 +51,7 @@ public class ProductController {
         }
     }
 
-    // 🔹 Obtener productos de un usuario
+    // Obtener productos de un usuario
     @GetMapping("/by-seller/{username}")
     public ResponseEntity<List<Map<String, Object>>> getProductsBySeller(@PathVariable String username) {
         System.out.println(" Buscando productos del vendedor: " + username);
@@ -59,7 +59,7 @@ public class ProductController {
         try {
             List<Product> products = productService.getProductsBySeller(username);
 
-            // ✅ Transformamos cada producto en un mapa asegurando que los valores sean Object
+            // Transformamos cada producto en un mapa asegurando que los valores sean Object
             List<Map<String, Object>> productResponses = products.stream().map(product -> {
                 Map<String, Object> productMap = new HashMap<>();
                 productMap.put("id", product.getId());
@@ -69,13 +69,13 @@ public class ProductController {
                 productMap.put("tax", product.getTax());
                 productMap.put("currency", product.getCurrency().name());
                 productMap.put("image", product.getImage());
-                productMap.put("sellerUsername", product.getSeller() != null ? product.getSeller().getUsername() : "Desconocido"); // ✅ Solución aquí
+                productMap.put("sellerUsername", product.getSeller() != null ? product.getSeller().getUsername() : "Desconocido");
                 return productMap;
             }).toList();
 
             return ResponseEntity.ok(productResponses);
         } catch (Exception e) {
-            System.err.println("❌ Error al obtener productos del vendedor: " + e.getMessage());
+            System.err.println("Error al obtener productos del vendedor: " + e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }
@@ -140,7 +140,7 @@ public class ProductController {
             response.put("message", "Producto eliminado correctamente");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            System.err.println("❌ Error al eliminar el producto: " + e.getMessage());
+            System.err.println("Error al eliminar el producto: " + e.getMessage());
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("error", "No se pudo eliminar el producto");
             return ResponseEntity.badRequest().body(errorResponse);

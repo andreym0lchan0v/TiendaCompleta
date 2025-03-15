@@ -1,4 +1,4 @@
-/* 📌 Estilos generales */
+/* Estilos generales */
 .tienda-container {
   padding: 40px;
   background: #f8f9fa;
@@ -22,13 +22,13 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: transform 0.3s ease-in-out;
-
-  /* 🌟 Efecto de hover */
+  margin-bottom: 5%;
+  /* Efecto de hover */
   &:hover {
     transform: scale(1.1);
   }
 
-  /* 🔹 Línea decorativa debajo del título */
+  /* Línea decorativa debajo del título */
   &::after {
     content: "";
     width: 100%;
@@ -41,7 +41,7 @@
     animation: pulseGlow 1.5s infinite alternate;
   }
 }
-/* 📌 Barra de búsqueda y filtros en línea */
+/* Barra de búsqueda y filtros en línea */
 .filters-container {
   display: flex;
   align-items: center;
@@ -51,7 +51,7 @@
   margin-bottom: 20px;
 }
 
-/* 🔍 Estilo del buscador */
+/* Estilo del buscador */
 .search-container {
   display: flex;
   align-items: center;
@@ -67,7 +67,7 @@
     margin-right: 10px;
     font-size: 1.2rem;
   }
-  /* 📦 Icono de carrito en cada producto */
+  /* Icono de carrito en cada producto */
 
 
   input {
@@ -87,7 +87,7 @@
   }
 }
 
-/* 🎚️ Slider de Precio Mejorado */
+/* Slider de Precio Mejorado */
 .price-slider {
   display: flex;
   flex-direction: column;
@@ -107,7 +107,7 @@
     align-items: center;
   }
 
-  /* 🎚️ Barra de rango dinámica */
+  /* Barra de rango dinámica */
   .slider-track {
     position: absolute;
     height: 8px;
@@ -139,7 +139,7 @@
 }
 
 
-/* 🔄 Botón de restablecer */
+/* Botón de restablecer */
 .reset-btn {
   background: #ffcc00;
   color: black;
@@ -155,7 +155,7 @@
   }
 }
 
-/* 📦 Grid de productos */
+/* Grid de productos */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -164,7 +164,7 @@
   max-width: 1200px;
 }
 
-/* 📦 Tarjetas de productos */
+/* Tarjetas de productos */
 .product-card {
   position: relative;
   width: 100%;
@@ -208,7 +208,7 @@
     margin-top: 5px;
   }
 
-  /* 📸 Imagen del producto */
+  /* Imagen del producto */
   .cart-img {
     width: 100%;
     max-width: 200px;
@@ -222,7 +222,7 @@
     }
   }
 
-  /* 🛒 Botón de añadir al carrito */
+  /* Botón de añadir al carrito */
   .btn-add-cart {
     position: absolute;
     top: 10px;
@@ -257,7 +257,7 @@
   }
 }
 
-/* 🖥️ Modal de producto */
+/* Modal de producto */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -286,7 +286,7 @@
   align-items: center;
   position: relative;
 
-  /* 📸 Imagen en el modal */
+  /* Imagen en el modal */
   .cart-img {
     width: 100%;
     max-width: 300px;
@@ -312,7 +312,7 @@
     margin-bottom: 10px;
   }
 
-  /* ❌ Botón de cerrar */
+  /* Botón de cerrar */
   .icon-cancel {
     color: red;
     font-size: 1.8rem;
@@ -328,7 +328,7 @@
   }
 }
 
-/* 📌 Animaciones */
+/* Animaciones */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -338,7 +338,7 @@
   }
 }
 
-/* 📱 Responsive Design */
+/* Responsive Design */
 @media (max-width: 768px) {
   .filters-container {
     flex-direction: column;

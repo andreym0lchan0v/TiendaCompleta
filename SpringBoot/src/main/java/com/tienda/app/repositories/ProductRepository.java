@@ -12,8 +12,6 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findBySellerUsername(String username);
     List<Product> findByNameContainingIgnoreCase(String name);
-
-    // ✅ Nuevos métodos agregados
     List<Product> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
     List<Product> findTop10ByOrderByCreatedAtDesc();
     List<Product> findByCurrency(Currency currency);

@@ -27,7 +27,7 @@ export const routes: Routes = [
       {path: "", component: HomeComponent}, // -> www.ejemplo.com
       {path: "login", component: LoginComponent, canActivate: [publicGuard]}, // -> www.ejemplo.com/login
       {path: "registro", component: RegistroComponent, canActivate: [publicGuard]}, // -> www.ejemplo.com/registro
-      {path: "tienda", component: TiendaComponent}, // www.ejemplo.com/tienda
+      {path: "tienda", component: TiendaComponent, canActivate: [authGuard]}, // www.ejemplo.com/tienda
       {path: "perfil", component: PerfilClienteComponent, canActivate: [authGuard]},
       {path: "checkout", component: CheckoutComponent, canActivate: [authGuard]}
     ]

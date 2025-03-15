@@ -53,7 +53,7 @@ export class TiendaComponent implements OnInit {
         this.updatePriceLimits();
       },
       error: (error) => {
-        console.error("❌ Error al cargar los productos", error);
+        console.error(" Error al cargar los productos", error);
       }
     });
   }

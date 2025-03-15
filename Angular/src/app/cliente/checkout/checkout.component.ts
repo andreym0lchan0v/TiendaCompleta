@@ -2,12 +2,14 @@ import { CommonModule, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartService } from '../../services/auth/cart.service';
+import { PopupService } from '../../services/utils/popup.service';
 
 interface Product {
   name: string;
   quantity: number;
   price: number;
   currency: string;
+  tax: number;
 
 }
 
@@ -40,7 +42,7 @@ export class CheckoutComponent implements OnInit {
   paymentMethod: string = 'credit-card';
   totalAmount: number = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private popupService: PopupService) {}
 
   ngOnInit() {
     this.cartService.cart$.subscribe(cart => {
@@ -51,7 +53,7 @@ export class CheckoutComponent implements OnInit {
 
   calculateTotal() {
     this.totalAmount = this.cart.reduce((total, product) => {
-      const priceInUSD = product.currency === 'EUR' ? product.price * 1.10 : product.price;
+      const priceInUSD = product.currency === 'EUR' ? product.price * 1.10 + product.tax * 1.10 : product.price + product.tax;
       return total + priceInUSD * product.quantity;
     }, 0);
   }
@@ -59,7 +61,7 @@ export class CheckoutComponent implements OnInit {
   processCheckout() {
     if (!this.shippingInfo.fullName || !this.shippingInfo.email || !this.shippingInfo.address ||
         !this.shippingInfo.city || !this.shippingInfo.postalCode || !this.shippingInfo.country) {
-      alert('Por favor, completa todos los campos de envío.');
+      this.popupService.showMessage('Error', 'Por favor, completa todos los campos de envío.', 'warning');
       return;
     }
 
@@ -71,6 +73,6 @@ export class CheckoutComponent implements OnInit {
     };
 
     console.log('Pedido confirmado:', orderDetails);
-    alert('¡Pedido confirmado con éxito!');
+    this.popupService.showMessage('Éxito', '¡Pedido confirmado con éxito!', 'success');
   }
 }

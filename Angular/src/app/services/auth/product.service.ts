@@ -90,7 +90,7 @@ getUserProducts(username: string): Observable<ProductInterface[]> {
     }).pipe(
       map(response => {
         if (response.message) {
-          console.log("✅ Producto eliminado correctamente:", response.message);
+          console.log("Producto eliminado correctamente:", response.message);
           return response;
         } else {
           throw new Error(response.error || "Error desconocido al eliminar producto");

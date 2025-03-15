@@ -79,7 +79,7 @@ export class PerfilClienteComponent implements OnInit {
 
     try {
       const response = await this.http
-        .put(`${environment.apiUrl}/users/change-password`, this.passwordData, { responseType: 'text' }) // Asegura que reciba texto
+        .put(`${environment.apiUrl}/users/change-password`, this.passwordData, { responseType: 'text' })
         .toPromise();
 
       if (response) {

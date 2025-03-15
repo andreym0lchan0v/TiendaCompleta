@@ -31,7 +31,7 @@ export const authGuard: CanActivateFn = async (route, state) => {
 
     return true;
   } catch (error) {
-    // tokenService.removeToken()
+    tokenService.removeToken()
     router.navigate(['/login']);
     return false;
   }

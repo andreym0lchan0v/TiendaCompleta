@@ -36,7 +36,7 @@ export class ProductosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currentUser = this.userService.getUsername() ?? ''; //  Solución aplicada para evitar null
+    this.currentUser = this.userService.getUsername() ?? '';
     this.loadUserProducts();
   }
 
@@ -46,7 +46,7 @@ export class ProductosComponent implements OnInit {
 
   closeModal() {
     this.showModal = false;
-    this.resetNewProduct(); //  Resetea el formulario al cerrar el modal
+    this.resetNewProduct();
   }
 
   loadUserProducts() {
@@ -99,7 +99,7 @@ export class ProductosComponent implements OnInit {
   deleteProduct(id: number) {
     this.productService.deleteProduct(id).subscribe({
       next: (response) => {
-        console.log("✅ Respuesta del backend:", response);
+        console.log("Respuesta del backend:", response);
 
         if (response.message) {
           this.popupService.showMessage('Éxito', response.message, 'success');

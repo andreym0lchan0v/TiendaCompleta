@@ -30,11 +30,11 @@
 
         <h3>Método de Pago</h3>
         <div class="payment-options">
-          <label>
-            <input type="radio" [(ngModel)]="paymentMethod" name="payment" value="credit-card" checked>
-            <i class="bi bi-credit-card"></i> Tarjeta de Crédito
+          <label class="credit-card">
+            <input type="radio"  [(ngModel)]="paymentMethod" name="payment" value="credit-card" checked>
+            <i class="bi bi-credit-card"></i> Tarjeta Crédito
           </label>
-          <label>
+          <label class="paypal">
             <input type="radio" [(ngModel)]="paymentMethod" name="payment" value="paypal">
             <i class="bi bi-paypal"></i> PayPal
           </label>
@@ -53,11 +53,11 @@
         <img src="/nikedunk.jpg" alt="Imagen del producto">
         <div class="summary-info">
           <h4>{{ product.name }}</h4>
-          <p>{{ product.quantity }} x {{ product.price | currency:'USD' }}</p>
+          <p>{{ product.quantity }} x {{ product.price + product.tax | currency:'USD' }}</p>
         </div>
       </div>
 
-      <p class="total-price">Total: <span>{{ totalAmount | currency:'USD' }}</span></p>
+      <p class="total-price">Total: <span>{{ totalAmount | currency:'USD' }} USD</span></p>
     </div>
   </div>
 </div>

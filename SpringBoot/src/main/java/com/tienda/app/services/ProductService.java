@@ -112,7 +112,7 @@ public class ProductService {
         }
         try {
             productRepository.deleteById(id);
-            System.out.println("✅ Producto eliminado con éxito: ID " + id);
+            System.out.println("Producto eliminado con éxito: ID " + id);
         } catch (Exception e) {
             throw new RuntimeException(" Error al eliminar el producto: " + e.getMessage());
         }

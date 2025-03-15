@@ -44,7 +44,7 @@ export class CartComponent implements OnInit {
   }
   calculateTotal() {
     this.totalAmount = this.cart.reduce((acc, product) => {
-      const priceInUSD = product.currency === 'EUR' ? product.price * 1.10 : product.price;
+      const priceInUSD = product.currency === 'EUR' ? product.price * 1.10 + product.tax * 1.10 : product.price + product.tax;
       return acc + priceInUSD * product.quantity;
     }, 0);
   }
